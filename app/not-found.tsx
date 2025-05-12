@@ -8,11 +8,13 @@ import {useEffect, useState} from 'react'
  * @see https://nextjs.org/docs/app/api-reference/file-conventions/not-found
  */
 export default function NotFound() {
-  const [referer, setReferer] = useState<string | null>(null)
+  const [referer, setReferer] = useState('')
 
   useEffect(() => {
     // Get the referer from document.referrer on the client side
-    setReferer(document.referrer)
+    if (typeof document !== 'undefined') {
+      setReferer(document.referrer)
+    }
   }, [])
 
   return (
