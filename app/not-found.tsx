@@ -1,21 +1,24 @@
-import {headers} from 'next/headers'
+'use client'
+
+import {useEffect, useState} from 'react'
 
 /**
  * Not Found component.
  *
  * @see https://nextjs.org/docs/app/api-reference/file-conventions/not-found
  */
-export default async function NotFound() {
-  // Get the referer header.
-  const headersList = await headers()
+export default function NotFound() {
+  const [referer, setReferer] = useState<string | null>(null)
 
-  // Get the referer header value.
-  const referer = headersList.get('referer')
+  useEffect(() => {
+    // Get the referer from document.referrer on the client side
+    setReferer(document.referrer)
+  }, [])
 
   return (
     <>
       <h1 className="text-center">404 - Not Found</h1>
-      <p className="text-center text-red-500">{referer}</p>
+      {referer && <p className="text-center text-red-500">{referer}</p>}
     </>
   )
 }
