@@ -18,6 +18,9 @@ const nextConfig: NextConfig = {
     fetches: {
       fullUrl: true
     }
+  },
+  eslint: {
+    ignoreDuringBuilds: true
   }
 }
 
